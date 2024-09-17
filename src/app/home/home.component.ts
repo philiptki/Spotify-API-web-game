@@ -79,4 +79,8 @@ export class HomeComponent implements OnInit {
     console.log(this.selectedGenre);
     console.log(TOKEN_KEY);
   }
+
+  clicked() {
+    console.log("play button clicked");
+  }
 }

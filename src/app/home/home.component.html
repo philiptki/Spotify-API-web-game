@@ -1,10 +1,21 @@
-<div *ngIf="authLoading || configLoading">Loading...</div>
-<div *ngIf="!authLoading && !configLoading">
-  Genre:
-  <select [(ngModel)]="selectedGenre" (ngModelChange)="setGenre($event)">
-    <option [value]=""></option>
-    <option [value]="genre" *ngFor="let genre of genres">
-      {{ genre }}
-    </option>
-  </select>
-</div>
+<!--<div *ngIf="authLoading || configLoading">Loading...</div>-->
+<!--<div *ngIf="!authLoading && !configLoading">-->
+<!--  Genre:-->
+<!--  <select [(ngModel)]="selectedGenre" (ngModelChange)="setGenre($event)">-->
+<!--    <option [value]=""></option>-->
+<!--    <option [value]="genre" *ngFor="let genre of genres">-->
+<!--      {{ genre }}-->
+<!--    </option>-->
+<!--  </select>-->
+<!--</div>-->
+
+<body>
+    <div class="container">
+
+        <h1>GUESS THAT SONG?!?!</h1>
+
+        <button class="play-button" (click)="clicked()">Play</button>
+    </div>
+</body>
+
+
