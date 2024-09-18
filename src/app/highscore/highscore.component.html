@@ -1,0 +1,14 @@
+<body>
+    <div class="container">
+
+        <h1>High Score!</h1>
+
+        <div class="highscore-container">
+            <div class="highscore-entry">
+                <input type="text" [(ngModel)]="playerName" placeholder="Enter your name">
+            </div>
+
+            <button routerLink="/" class="submit-button" (click)="clicked()">Submit</button>
+        </div>
+    </div>
+</body>
