@@ -82,5 +82,10 @@ export class HomeComponent implements OnInit {
 
   clicked() {
     console.log("play button clicked");
+    // const response = fetchFromSpotify({
+    //   token: this.token,
+    //   endpoint: "browse/categories/party/playlists?limit=10",
+    // });
+    // console.log(response);
   }
 }
