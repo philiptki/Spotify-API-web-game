@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /*height: 100vh;*/
+    background-color: #ffffff;
+    /*margin: 0;*/
+}
+
+.container {
+    /*margin: 0;*/
+    text-align: center;
+    margin-top: 10em;
+}
+
+h1 {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 4em;
+    color: #000;
+    padding-bottom: 3em;
+}
+
+.tryagain-button {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+    background-color: #6a4caf;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tryagain-button:hover {
+    background-color: #5a3aa0;
+}
