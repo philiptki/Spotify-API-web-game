@@ -4,16 +4,13 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
     display: flex;
     justify-content: center;
     align-items: stretch;
     background-color: #ffffff;
-    height: calc(100vh - 4vh - 48px);
+    /* Take into account the navbar height, padding, and the 20px body margin */
+    height: calc(100vh - 2vh - 48px - 20px);
 }
 
 .container {
