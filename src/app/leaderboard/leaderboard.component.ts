@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface Score {
-  name: string;
-  points: number;
-}
+import { initScores, getScores, Score } from "../../services/storage";
 
 @Component({
   selector: 'app-leaderboard',
@@ -12,26 +8,20 @@ export interface Score {
 })
 export class LeaderboardComponent implements OnInit {
 
-  scores: Score[] = [
-    { name: "Adam", points: 3 },
-    { name: "Carrie", points: 6 },
-    { name: "Alex", points: 5 },
-    { name: "Sarah", points: 2 },
-    { name: "Matthew", points: 7 },
-  ]
-
   constructor() { }
 
   ngOnInit(): void {
-    this.scores.sort((a, b) => b.points - a.points);
+    initScores();
   }
 
   clicked() {
     console.log("home button clicked");
   }
 
-  getScores() {
-    return this.scores.slice(0,5);
-  }
+  /**
+   * Get top 5 scores
+   * @returns Score[5]
+   */
+  getTopScores = (): Score[] => getScores().slice(0,5);
 
 }
