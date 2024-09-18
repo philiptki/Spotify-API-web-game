@@ -11,9 +11,9 @@
                     <th>Score</th>
                 </tr>
             </thead>
-            <ng-container *ngFor="let element of getScores(); let index=index">
+            <ng-container *ngFor="let element of getTopScores(); let index=index">
                 <tr>
-                <td class="field-index">{{index+1}}.</td>
+                <td class="field-index">{{ index + 1 }}.</td>
                 <td class="field-label">{{ element.name }}</td>
                 <td class="field-value">{{ element.points }}</td>
                 </tr>
