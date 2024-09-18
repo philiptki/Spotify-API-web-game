@@ -6,11 +6,15 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { HomeComponent } from "./home/home.component";
 import { NavComponent } from './nav/nav.component';
+import { SettingsComponent } from './settings/settings.component';
 
-const routes: Routes = [{ path: "", component: HomeComponent }];
+const routes: Routes = [
+  { path: "", component: HomeComponent },
+  { path: "settings", component: SettingsComponent },
+];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NavComponent],
+  declarations: [AppComponent, HomeComponent, NavComponent, SettingsComponent],
   imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],

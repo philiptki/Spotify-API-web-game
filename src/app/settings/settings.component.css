@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /*background-color: #87cefa;*/
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(0, 0, 0);
+    padding: 3rem;
+    width: 15em;
+    min-width: 10em;
+    max-width: 20em;
+    min-height: 15em;
+    margin: 5em;
+}
+
+.volume-slider {
+    margin-bottom: 1.5em;
+}
+
+.volume-slider label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 1.2em;
+    color: #000;
+}
+
+.volume-slider input[type="range"] {
+    width: 100%;
+}
+
+.toggles {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle label {
+    font-size: 1.2em;
+    color: #000;
+}
+
+.toggle input[type="checkbox"] {
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+}
