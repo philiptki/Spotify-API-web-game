@@ -3,32 +3,33 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 2vw;
+    gap: 1.5vw;
     padding: 1vh 2vw;
 }
 
-.settings-icon {
-    font-size: 3em;
-    cursor: pointer;
-}
-
-.leaderboard-icon {
-    font-size: 3em;
-    cursor: pointer;
-}
-
-button.leaderboard-icon,
-button.settings-icon {
-    width: 1em;
-    height: 1em;
+button {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 100px;
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
-button {
-    background-color: white;
-    border: none;
-    border-radius: 100px;
+button:hover {
+    animation: shake 0.5s;
+}
+
+svg path{
+    fill: #000000;
+    stroke: #000000; /* Color of the stroke (outline) */
+    stroke-width: 20; /* Thickness of the stroke */
+}
+
+@keyframes shake {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
 }
