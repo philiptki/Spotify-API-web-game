@@ -10,13 +10,15 @@
     </div>
 
     <div class="play-pause">
-        <span>play pause</span>
+        <button class="play-button" (click)="togglePlayback()">
+            {{ playing ? 'Pause' : 'Play' }}
+        </button>
     </div>
 
     <div class="button-container">
-        <button class="song-choice" (click)="clicked()">Song Choice 1</button>
-        <button class="song-choice" (click)="clicked()">Song Choice 2</button>
-        <button class="song-choice" (click)="clicked()">Song Choice 3</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(0)">Song Choice 1</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(1)">Song Choice 2</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(2)">Song Choice 3</button>
     </div>
 </div>
 </body>
