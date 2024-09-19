@@ -63,4 +63,20 @@ export const checkNewScore = (name: string, points: number): boolean => {
     return !scores.some((score) => score.points === points) && points > scores[scores.length - 1].points;
 }
 
+
+/**
+ * Set the volume level for music playback
+ * @param volume
+ */
+export const setVolume = (volume: number = 0.5): void => {
+    localStorage.setItem("volume", volume.toString());
+}
+
+export const getVolume = (): number => {
+    const volume = localStorage.getItem("volume");
+    if (!volume) {
+        setVolume();
+        return 0.5;
+    }
+    return parseFloat(volume);
 }
