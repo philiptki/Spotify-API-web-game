@@ -13,11 +13,15 @@ const TOKEN_KEY = "whos-who-access-token";
 export class HomeComponent implements OnInit {
   constructor() {}
 
-  genres: String[] = ["House", "Alternative", "J-Rock", "R&B"];
+  genres: String[] = [];
   selectedGenre: String = "";
   authLoading: boolean = false;
   configLoading: boolean = false;
   token: String = "";
+  playlistId: any;
+  tracks: any[] = [];
+  randomThreeTracks: any[] = [];
+  mainTrack: any;
 
   ngOnInit(): void {
     this.authLoading = true;
@@ -58,34 +62,84 @@ export class HomeComponent implements OnInit {
     // });
     // console.log(response);
     // #################################################################################
-    
+
     this.genres = [
       "rock",
-      "rap",
       "pop",
       "country",
-      "hip-hop",
-      "jazz",
+      "hiphop",
+      "rnb",
       "alternative",
-      "j-pop",
-      "k-pop",
-      "emo"
+      "funk",
+      "soul"
     ]
     this.configLoading = false;
   };
 
   setGenre(selectedGenre: any) {
     this.selectedGenre = selectedGenre;
-    console.log(this.selectedGenre);
-    console.log(TOKEN_KEY);
+    // console.log(this.selectedGenre);
+    // console.log(TOKEN_KEY);
   }
 
-  clicked() {
-    console.log("play button clicked");
-    // const response = fetchFromSpotify({
-    //   token: this.token,
-    //   endpoint: "browse/categories/party/playlists?limit=10",
-    // });
-    // console.log(response);
+  //picks a random genre from the genre list
+  setRandomGenre() {
+    let index = Math.floor(Math.random() * this.genres.length);
+    this.setGenre(this.genres[index]);
+  }
+
+  //sets random playlist's id from list of playlists from the selected genre
+  async setRandomPlaylistID() {
+    let response = await fetchFromSpotify({
+      token: this.token,
+      endpoint: "browse/categories/" + this.selectedGenre + "/playlists?limit=10"
+    });
+    //setting the playlistId to a randomly selected playlist id
+    let playlistSize = response.playlists.items.length;
+    this.playlistId = response.playlists.items[Math.floor(Math.random() * playlistSize)].id;
+  }
+
+  //set's tracks to all the tracks from a playlist with the given playlist id
+  async tracksFromPlaylistID(playlistId: any) {
+    let response = await fetchFromSpotify({
+      token: this.token,
+      endpoint: "playlists/" + playlistId + "/tracks"
+    });
+    //only adding tracks that don't have a null preview_url
+    response.items.forEach((item: any) => {
+      let track = item.track;
+      if (track && track.preview_url != null) {
+        this.tracks.push(track);
+      }
+    });
+  }
+
+  //sets the randomThreeTracks to three random track from the tracks list
+  setRandomThreeTracks() {
+    let randomIndices = new Set();
+    while (randomIndices.size < 3) {
+      let randomIndex = Math.floor(Math.random() * this.tracks.length);
+      randomIndices.add(randomIndex);
+    }
+    //array list of random track indexes
+    let arrOfTrackID = Array.from(randomIndices);
+    this.randomThreeTracks = arrOfTrackID.map((index: any) => this.tracks[index]);
+  }
+
+  chooseMainTrack() {
+    let randomIndex = Math.floor(Math.random() * this.randomThreeTracks.length);
+    this.mainTrack = this.randomThreeTracks[randomIndex];
+  }
+
+  async clicked() {
+
+    this.setRandomGenre();
+    await this.setRandomPlaylistID();
+    await this.tracksFromPlaylistID(this.playlistId)
+    this.setRandomThreeTracks()
+    this.chooseMainTrack()
+
+    console.log(this.selectedGenre)
+    console.log(this.mainTrack)
   }
 }
