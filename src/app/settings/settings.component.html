@@ -3,7 +3,7 @@
 
         <div class="volume-slider">
             <label for="volume">Volume</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+            <input #volume type="range" id="volume" name="volume" min="0" max="100" value="{{getVolume()}}" (input)="setVolume(volume.value)">
         </div>
 
         <div class="toggles">

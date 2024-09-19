@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Howl } from 'howler';
 import { playService } from "../../services/playService";
 import {lowerFirst} from "lodash";
+import { getVolume } from 'src/services/storage';
 
 @Component({
   selector: 'app-play',
@@ -54,7 +55,7 @@ export class PlayComponent implements OnInit {
       html5: true,
       autoplay: false,
       loop: false,
-      volume: 1,
+      volume: getVolume(),
     });
   }
 

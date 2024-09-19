@@ -9,20 +9,25 @@ export interface Score {
  */
 export const initScores = (): void => {
     const scoreJson = localStorage.getItem("scores");
-    let scores: Score[] = [];
-    if (scoreJson !== null) {
-        scores = JSON.parse(scoreJson);
-        scores.sort((a, b) => b.points - a.points);
-    } else {
-        scores = [
+    if (!scoreJson) {
+        let scores: Score[] = [
         { name: "Adam", points: 3 },
         { name: "Carrie", points: 6 },
         { name: "Alex", points: 5 },
         { name: "Sarah", points: 2 },
         { name: "Matthew", points: 7 },
         ];
+        scores = sortScores(scores);
+        localStorage.setItem("scores", JSON.stringify(scores));
     }
-    localStorage.setItem("scores", JSON.stringify(scores));
+}
+
+/**
+ * Sort the scores in descending order.
+ */
+export const sortScores = (scores:Score[]): Score[] => {
+    scores.sort((a, b) => b.points - a.points);
+    return scores;
 }
 
 /**
@@ -40,16 +45,38 @@ export const addScore = (name: string, points: number): void => {
     const score: Score = { name, points };
     let scores: Score[] = getScores();
     scores.push(score);
+    scores = sortScores(scores);
     localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 /**
- * Check if a score is new.
+ * Check if a score is a new high score and fits in the top 5.
  * @param name The player's name
  * @param points The player's score
  * @returns True if the score is new, False otherwise
  */
 export const checkNewScore = (name: string, points: number): boolean => {
-    const scores = getScores();
-    return scores.find((score) => score.points < points) === undefined
+    const scores = getScores().slice(0,5);
+    if (scores.length === 0 || !scores) {
+        return false;
+    }
+    return !scores.some((score) => score.points === points) && points > scores[scores.length - 1].points;
+}
+
+
+/**
+ * Set the volume level for music playback
+ * @param volume
+ */
+export const setVolume = (volume: number = 0.5): void => {
+    localStorage.setItem("volume", volume.toString());
+}
+
+export const getVolume = (): number => {
+    const volume = localStorage.getItem("volume");
+    if (!volume) {
+        setVolume();
+        return 0.5;
+    }
+    return parseFloat(volume);
 }
