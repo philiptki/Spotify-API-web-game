@@ -133,13 +133,13 @@ export class HomeComponent implements OnInit {
 
   async clicked() {
 
-    this.setRandomGenre();
-    await this.setRandomPlaylistID();
-    await this.tracksFromPlaylistID(this.playlistId)
-    this.setRandomThreeTracks()
-    this.chooseMainTrack()
-
-    console.log(this.selectedGenre)
-    console.log(this.mainTrack)
+    // this.setRandomGenre();
+    // await this.setRandomPlaylistID();
+    // await this.tracksFromPlaylistID(this.playlistId)
+    // this.setRandomThreeTracks()
+    // this.chooseMainTrack()
+    //
+    // console.log(this.selectedGenre)
+    // console.log(this.mainTrack)
   }
 }
