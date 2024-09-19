@@ -86,3 +86,21 @@ h1 {
 .song-choice:hover {
     background-color: #5a3aa0;
 }
+
+
+.play-button {
+    font-size: 0.5em;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: #bbbbbb;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.play-button:hover {
+    background-color: #979797;
+}
