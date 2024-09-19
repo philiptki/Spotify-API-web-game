@@ -1,4 +1,4 @@
-<body>
+<body *ngIf="gameStarted">
 <div class="container">
 
     <div class="top-bar">
@@ -9,6 +9,8 @@
         <button routerLink="" class="exit-button">exit</button>
     </div>
 
+    <div>{{ mainTrack.name }}</div>
+
     <div class="play-pause">
         <button class="play-button" (click)="togglePlayback()">
             {{ playing ? 'Pause' : 'Play' }}
@@ -16,9 +18,9 @@
     </div>
 
     <div class="button-container">
-        <button class="song-choice" (click)="stopPlayback(); clicked(0)">Song Choice 1</button>
-        <button class="song-choice" (click)="stopPlayback(); clicked(1)">Song Choice 2</button>
-        <button class="song-choice" (click)="stopPlayback(); clicked(2)">Song Choice 3</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(0)">{{ randomThreeTracks[0].name }}</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(1)">{{ randomThreeTracks[1].name }}</button>
+        <button class="song-choice" (click)="stopPlayback(); clicked(2)">{{ randomThreeTracks[2].name }}</button>
     </div>
 </div>
 </body>
