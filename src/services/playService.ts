@@ -46,6 +46,7 @@ export class playService {
     tracks: any[] = [];
     randomThreeTracks: any[] = [];
     mainTrack: any;
+    mainTrackIndex: number = 0;
 
     loadGenres = async (t: any) => {
         this.configLoading = true;
@@ -106,7 +107,7 @@ export class playService {
         //only adding tracks that don't have a null preview_url
         response.items.forEach((item: any) => {
             let track = item.track;
-            if (track && track.preview_url != null) {
+            if (track && track.preview_url != null && track.explicit !== true) {
                 this.tracks.push(track);
             }
         });
@@ -127,6 +128,7 @@ export class playService {
     chooseMainTrack() {
         let randomIndex = Math.floor(Math.random() * this.randomThreeTracks.length);
         this.mainTrack = this.randomThreeTracks[randomIndex];
+        this.mainTrackIndex = randomIndex;
     }
 
     async startRound() {

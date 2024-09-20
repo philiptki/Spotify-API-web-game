@@ -55,7 +55,7 @@ export const addScore = (name: string, points: number): void => {
  * @param points The player's score
  * @returns True if the score is new, False otherwise
  */
-export const checkNewScore = (name: string, points: number): boolean => {
+export const checkNewHighScore = (points: number): boolean => {
     const scores = getScores().slice(0,5);
     if (scores.length === 0 || !scores) {
         return false;
@@ -63,6 +63,31 @@ export const checkNewScore = (name: string, points: number): boolean => {
     return !scores.some((score) => score.points === points) && points > scores[scores.length - 1].points;
 }
 
+export const setPoints = (points: number) => {
+    localStorage.setItem("points", points.toString());
+}
+
+export const getPoints = (): number => {
+    const currentScore = localStorage.getItem("points")
+    if (currentScore !== null && currentScore !== undefined) {
+        return parseInt(currentScore);
+    }
+    setPoints(0);
+    return 0
+}
+
+export const setWrong = (wrong: number): void => {
+    localStorage.setItem("wrong", wrong.toString());
+}
+
+export const getWrong = (): number => {
+    const wrong = localStorage.getItem("wrong");
+    if (wrong !== null && wrong !== undefined) {
+        return parseInt(wrong);
+    }
+    setWrong(0);
+    return 0
+}
 
 /**
  * Set the volume level for music playback
@@ -79,4 +104,38 @@ export const getVolume = (): number => {
         return 0.5;
     }
     return parseFloat(volume);
+}
+
+export const stopGame = () => {
+    localStorage.setItem("gameInProgress", false.toString());
+    setPoints(0);
+    setWrong(0);
+}
+
+export const startGame= () => {
+    localStorage.setItem("gameInProgress", true.toString());
+    setPoints(0);
+    setWrong(0);
+}
+
+export const getGame = (): boolean => {
+    const gameInProgress = localStorage.getItem("gameInProgress");
+    if (gameInProgress !== null && gameInProgress !== undefined) {
+        return JSON.parse(gameInProgress);
+    }
+    startGame();
+    return false;
+}
+
+export const setFinalScore = (points: number) => {
+    localStorage.setItem("finalPoints", points.toString());
+}
+
+export const getFinalScore = (): number => {
+    const finalPoints = localStorage.getItem("finalPoints");
+    if (finalPoints !== null && finalPoints !== undefined) {
+        return parseInt(finalPoints);
+    }
+    localStorage.setItem("finalPoints", JSON.stringify(0));
+    return 0;
 }

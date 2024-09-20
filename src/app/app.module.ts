@@ -23,7 +23,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NavComponent, SettingsComponent, LeaderboardComponent, PlayComponent, GameoverComponent, HighscoreComponent],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   providers: [],
   bootstrap: [AppComponent],
 })
