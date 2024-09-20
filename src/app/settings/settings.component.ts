@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getVolume, setVolume } from 'src/services/storage';
+import { getVolume, setVolume, getExplicitAllowed, setExplicitAllowed } from 'src/services/storage';
 
 @Component({
   selector: 'app-settings',
@@ -11,6 +11,7 @@ export class SettingsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(getExplicitAllowed())
   }
 
   /**
@@ -28,5 +29,14 @@ export class SettingsComponent implements OnInit {
   setVolume(volume: string) {
     setVolume(parseInt(volume)/100);
     console.log(getVolume());
+  }
+
+  getExplicitAllowed(): boolean {
+    return getExplicitAllowed();
+  }
+
+  setExplicitAllowed(event: Event) {
+    const target = event.target as HTMLInputElement;
+    setExplicitAllowed(target.checked);
   }
 }

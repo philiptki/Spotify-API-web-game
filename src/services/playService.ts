@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import fetchFromSpotify, { request } from "src/services/api";
+import { getExplicitAllowed } from "src/services/storage";
 
 const AUTH_ENDPOINT =
     "https://nuod0t2zoe.execute-api.us-east-2.amazonaws.com/FT-Classroom/spotify-auth-token";
@@ -107,7 +108,7 @@ export class playService {
         //only adding tracks that don't have a null preview_url
         response.items.forEach((item: any) => {
             let track = item.track;
-            if (track && track.preview_url != null && track.explicit !== true) {
+            if (track && track.preview_url != null && (getExplicitAllowed() || !track.explicit)) {
                 this.tracks.push(track);
             }
         });

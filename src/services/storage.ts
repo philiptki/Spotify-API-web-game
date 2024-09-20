@@ -137,3 +137,16 @@ export const getFinalScore = (): number => {
     localStorage.setItem("finalPoints", JSON.stringify(0));
     return 0;
 }
+
+export const getExplicitAllowed = (): boolean => {
+    const explicit = localStorage.getItem("explicit");
+    if (explicit !== null && explicit !== undefined) {
+        return JSON.parse(explicit);
+    }
+    localStorage.setItem("explicit", JSON.stringify(false));
+    return false;
+}
+
+export const setExplicitAllowed = (explicit: boolean) => {
+    localStorage.setItem("explicit", JSON.stringify(explicit));
+}
