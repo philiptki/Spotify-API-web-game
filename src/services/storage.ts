@@ -51,16 +51,14 @@ export const addScore = (name: string, points: number): void => {
 
 /**
  * Check if a score is a new high score and fits in the top 5.
- * @param name The player's name
  * @param points The player's score
- * @returns True if the score is new, False otherwise
+ * @returns True if the score fits in the top 5.
  */
 export const checkNewHighScore = (points: number): boolean => {
     const scores = getScores().slice(0,5);
-    if (scores.length === 0 || !scores) {
-        return false;
-    }
-    return !scores.some((score) => score.points === points) && points > scores[scores.length - 1].points;
+    return (!scores.some((score) => score.points === points) &&
+        (scores.length < 5 || points > Math.min(...scores.map(score => score.points)))
+    );
 }
 
 export const setPoints = (points: number) => {
