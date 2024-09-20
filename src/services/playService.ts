@@ -132,11 +132,17 @@ export class playService {
     }
 
     async startRound() {
-        this.setRandomGenre();
-        await this.setRandomPlaylistID();
-        await this.tracksFromPlaylistID(this.playlistId)
-        this.setRandomThreeTracks()
+        //this.setRandomGenre();
+        //await this.setRandomPlaylistID();
+        //await this.tracksFromPlaylistID(this.playlistId)
+        //this.setRandomThreeTracks()
+        this.randomThreeTracks = [
+            {name: "orchestra", preview_url:"https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3"},
+            {name: "guitar", preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample2.mp3"},
+            {name: "bubbles", preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.m4a"},
+        ];
         this.chooseMainTrack()
+        //console.log(this.token)
 
         // console.log(this.selectedGenre)
         // console.log(this.mainTrack)
