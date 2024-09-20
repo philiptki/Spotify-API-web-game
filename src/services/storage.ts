@@ -51,7 +51,6 @@ export const addScore = (name: string, points: number): void => {
 
 /**
  * Check if a score is a new high score and fits in the top 5.
- * @param name The player's name
  * @param points The player's score
  * @returns True if the score fits in the top 5.
  */
