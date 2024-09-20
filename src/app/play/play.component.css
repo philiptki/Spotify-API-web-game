@@ -36,6 +36,11 @@ body, html {
 }
 
 .score {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
     font-size: 1em;
     text-align: left;
 }

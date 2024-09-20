@@ -1,12 +1,17 @@
-<body *ngIf="gameStarted">
+<body *ngIf="roundStarted">
+<div (window:beforeunload)="stopGame()"></div>
 <div class="container">
 
     <div class="top-bar">
         <div class="score">
-            <span>wrong</span><br>
-            <span>0/3</span>
+            <div class="wrong">
+                <span>Wrong: {{ getWrong() }}/3</span>
+            </div>
+            <div class="right">
+                <span>Right: {{ getPoints() }}</span>
+            </div>
         </div>
-        <button routerLink="" class="exit-button">exit</button>
+        <button routerLink="" class="exit-button" (click)="stopPlayback()">exit</button>
     </div>
 
     <div>{{ mainTrack.name }}</div>
