@@ -13,7 +13,7 @@ import {
   setWrong,
   setPoints,
   checkNewHighScore,
-  getScores
+  setFinalScore,
 } from 'src/services/storage';
 
 @Component({
@@ -95,6 +95,22 @@ export class PlayComponent implements OnInit {
   }
 
   nextRound() {
+    // End the game if the user got 3 wrong answers.
+    if (getWrong() == 3) {
+      // Go to the high score page if the user got a new high score.
+      if (checkNewHighScore(getPoints())) {
+        // Temporarily store the final score.
+        setFinalScore(getPoints());
+        // End the game, clearing out the wrong and points localStorage values.
+        stopGame();
+        this.router.navigate(["highscore"]);
+      } else {
+        // End the game, clearing out the wrong and points localStorage values.
+        stopGame();
+        // Go to the game over page.
+        this.router.navigate(["gameover"]);
+      }
+    }
     this.roundStarted = false;
     this.startRound();
   }
@@ -103,8 +119,11 @@ export class PlayComponent implements OnInit {
   dummyNextRound() {
     if (getWrong() == 3) {
       if (checkNewHighScore(getPoints())) {
+        setFinalScore(getPoints());
+        stopGame();
         this.router.navigate(["highscore"]);
       } else {
+        stopGame();
         this.router.navigate(["gameover"]);
       }
     }
@@ -173,12 +192,6 @@ export class PlayComponent implements OnInit {
         this.randomThreeTracks[2].preview_url
     ]
   }
-
-  //nextRound() {
-  //  const internalRefresh = false;
-  //  this.leavePage(internalRefresh);
-  //  this.router.navigate(["/play"], { skipLocationChange: true });
-  //}
 
   getWrong() {
     return getWrong();
