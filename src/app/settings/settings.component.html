@@ -8,16 +8,8 @@
 
         <div class="toggles">
             <div class="toggle">
-                <label for="toggle1">Toggle 1</label>
-                <input type="checkbox" id="toggle1">
-            </div>
-            <div class="toggle">
-                <label for="toggle2">Toggle 2</label>
-                <input type="checkbox" id="toggle2">
-            </div>
-            <div class="toggle">
-                <label for="toggle3">Toggle 3</label>
-                <input type="checkbox" id="toggle3">
+                <label for="toggle1">Allow Explicit</label>
+                <input type="checkbox" id="toggle1" [checked]="getExplicitAllowed()" (change)="setExplicitAllowed($event)">
             </div>
         </div>
     </div>
