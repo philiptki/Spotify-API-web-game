@@ -39,12 +39,7 @@ export class PlayComponent implements OnInit {
 
   roundStarted = false;
 
-  // randomThreeTracks: any[] = []
-  randomThreeTracks = [
-    { name: 'Sample 1', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3" },
-    { name: 'Sample 2', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample2.mp3" },
-    { name: 'Sample 3', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.m4a" }
-  ];  //this is dummy use above
+  randomThreeTracks: any[] = []
 
   mainTrack: any;
   mainTrackIndex: number = 0;
@@ -67,16 +62,11 @@ export class PlayComponent implements OnInit {
       }
     });
 
-
-    this.roundStarted = true;
-    this.setupPlayer()      //this is dummy use below instead of this
-
-
-    // this.playService.startRound().then(() => {
-    //   this.startRound();
-    // }).catch((error) => {
-    //   console.error('Error starting the round:', error);
-    // });
+    this.playService.startRound().then(() => {
+      this.startRound();
+    }).catch((error) => {
+      console.error('Error starting the round:', error);
+    });
   }
 
   async startRound() {
@@ -115,21 +105,6 @@ export class PlayComponent implements OnInit {
     this.startRound();
   }
 
-  //use above instead
-  dummyNextRound() {
-    if (getWrong() == 3) {
-      if (checkNewHighScore(getPoints())) {
-        setFinalScore(getPoints());
-        stopGame();
-        this.router.navigate(["highscore"]);
-      } else {
-        stopGame();
-        this.router.navigate(["gameover"]);
-      }
-    }
-  }
-
-
   clicked(index: number) {
     console.log("song choice clicked");
     if (index === this.mainTrackIndex) {
@@ -137,8 +112,7 @@ export class PlayComponent implements OnInit {
     } else {
       setWrong(getWrong() + 1);
     }
-    // this.nextRound();
-    this.dummyNextRound();  //dummy switch these
+    this.nextRound();
   }
 
   notPlaying() {
@@ -148,8 +122,7 @@ export class PlayComponent implements OnInit {
 
   setupPlayer() {
     this.player = new Howl({
-      // src: [this.tracksPreviewURL[this.mainTrackIndex]],
-      src: [this.tracksPreviewURL[0]], //dummy use above
+      src: [this.tracksPreviewURL[this.mainTrackIndex]],
       html5: true,
       autoplay: false,
       loop: false,
