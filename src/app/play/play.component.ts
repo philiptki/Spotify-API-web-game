@@ -3,7 +3,18 @@ import { Router, NavigationStart } from '@angular/router';
 import { Howl } from 'howler';
 import { playService } from "../../services/playService";
 import {lowerFirst} from "lodash";
-import { getVolume, startGame, getGame, getWrong, getPoints, stopGame, setWrong, setPoints } from 'src/services/storage';
+import {
+  getVolume,
+  startGame,
+  getGame,
+  getWrong,
+  getPoints,
+  stopGame,
+  setWrong,
+  setPoints,
+  checkNewHighScore,
+  getScores
+} from 'src/services/storage';
 
 @Component({
   selector: 'app-play',
@@ -28,7 +39,12 @@ export class PlayComponent implements OnInit {
 
   roundStarted = false;
 
-  randomThreeTracks: any[] = []
+  // randomThreeTracks: any[] = []
+  randomThreeTracks = [
+    { name: 'Sample 1', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.mp3" },
+    { name: 'Sample 2', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample2.mp3" },
+    { name: 'Sample 3', preview_url: "https://github.com/rafaelreis-hotmart/Audio-Sample-files/raw/master/sample.m4a" }
+  ];  //this is dummy use above
 
   mainTrack: any;
   mainTrackIndex: number = 0;
@@ -50,11 +66,17 @@ export class PlayComponent implements OnInit {
         }
       }
     });
-    this.playService.startRound().then(() => {
-      this.startRound();
-    }).catch((error) => {
-      console.error('Error starting the round:', error);
-    });
+
+
+    this.roundStarted = true;
+    this.setupPlayer()      //this is dummy use below instead of this
+
+
+    // this.playService.startRound().then(() => {
+    //   this.startRound();
+    // }).catch((error) => {
+    //   console.error('Error starting the round:', error);
+    // });
   }
 
   async startRound() {
@@ -77,6 +99,17 @@ export class PlayComponent implements OnInit {
     this.startRound();
   }
 
+  //use above instead
+  dummyNextRound() {
+    if (getWrong() == 3) {
+      if (checkNewHighScore(getPoints())) {
+        this.router.navigate(["highscore"]);
+      } else {
+        this.router.navigate(["gameover"]);
+      }
+    }
+  }
+
 
   clicked(index: number) {
     console.log("song choice clicked");
@@ -85,7 +118,8 @@ export class PlayComponent implements OnInit {
     } else {
       setWrong(getWrong() + 1);
     }
-    this.nextRound();
+    // this.nextRound();
+    this.dummyNextRound();  //dummy switch these
   }
 
   notPlaying() {
@@ -95,11 +129,19 @@ export class PlayComponent implements OnInit {
 
   setupPlayer() {
     this.player = new Howl({
-      src: [this.tracksPreviewURL[this.mainTrackIndex]],
+      // src: [this.tracksPreviewURL[this.mainTrackIndex]],
+      src: [this.tracksPreviewURL[0]], //dummy use above
       html5: true,
       autoplay: false,
       loop: false,
       volume: getVolume(),
+    });
+
+    //stops the audio when the browser back button is pressed
+    window.addEventListener('popstate', () => {
+      if (this.player?.playing()) {
+        this.player.stop();
+      }
     });
   }
 
